@@ -55,7 +55,11 @@ main {
   bottom: 25px;
   right: 10px;
 }
-.chat-bot-inner.open {
+.chat-bot-window.closed {
+  visibility: hidden;
+}
+.chat-bot-window.open {
+  display: flex;
   border: 1px solid orange;
 }
 
