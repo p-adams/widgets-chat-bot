@@ -57,13 +57,25 @@ main {
 .chat-bot-window {
   height: 300px;
   width: 200px;
+  display: flex;
   outline: 1px solid gray;
   border-radius: 4px;
 }
 .chat-bot-window.closed {
   visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    visibility 0s 0.3s;
 }
 .chat-bot-window.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    visibility 0s;
   display: flex;
 }
 .chat-bot-cog-wrapper {
