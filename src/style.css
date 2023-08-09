@@ -76,7 +76,6 @@ main {
   visibility: visible;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
     visibility 0s;
-  display: flex;
 }
 .chat-bot-cog-wrapper {
   display: flex;
