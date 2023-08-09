@@ -7,8 +7,10 @@ export function setupChatBot(element: HTMLDivElement) {
           b
           c
         </div>
-        <div class="chat-bot-cog">
-          bot
+        <div class="chat-bot-cog-wrapper">
+          <div class="chat-bot-cog-inner">
+            bot
+          </div>
         </div>
     </div>`;
 
