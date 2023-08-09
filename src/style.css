@@ -12,6 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --window-height: 300px;
 }
 
 a {
@@ -55,12 +56,25 @@ main {
   right: 50px;
 }
 .chat-bot-window {
-  height: 300px;
+  height: var(--window-height);
   width: 200px;
   display: flex;
+  flex-direction: column;
   outline: 1px solid gray;
   border-radius: 4px;
 }
+.window {
+  height: calc(var(--window-height) - 20px);
+}
+
+.input-outer {
+  display: flex;
+}
+
+.input-outer > input {
+  width: 75%;
+}
+
 .chat-bot-window.closed {
   visibility: hidden;
   opacity: 0;
@@ -119,7 +133,7 @@ main {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.6em 0.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
