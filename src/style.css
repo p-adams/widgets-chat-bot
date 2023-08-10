@@ -36,13 +36,13 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center;
 }
 
 #app {
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  text-align: center;
 }
 
 main {
@@ -62,13 +62,26 @@ main {
   flex-direction: column;
   outline: 1px solid gray;
   border-radius: 4px;
+  padding: 8px;
 }
 .window {
   height: calc(var(--window-height) - 20px);
+  padding: 4px;
+  outline: 1px solid lightgray;
+}
+
+.chat-text.user {
+  background-color: #646cff;
+  color: white;
+}
+
+.chat-text.bot {
+  background-color: lightgray;
 }
 
 .input-outer {
   display: flex;
+  margin-top: 6px;
 }
 
 .input-outer > input {
@@ -134,6 +147,7 @@ button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 0.2em;
+  margin-left: 4px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;

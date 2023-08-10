@@ -1,14 +1,4 @@
-interface Message {
-  id: string;
-  text: string;
-  timestamp: Date;
-  sender: string;
-  receiver: string;
-}
-
-function $el<T extends HTMLElement = HTMLElement>(selector: string): T | null {
-  return document.querySelector<T>(selector)!;
-}
+import { $el, generateUUID } from "./common";
 
 export function setupChatBot(element: HTMLDivElement) {
   element.innerHTML = `<div class="chat-bot-outer">
@@ -37,21 +27,21 @@ export function setupChatBot(element: HTMLDivElement) {
   let message = "";
   let messages: Message[] = [
     {
-      id: "1",
+      id: generateUUID(),
       text: "foo",
       timestamp: new Date(),
       sender: "user",
       receiver: "bot",
     },
     {
-      id: "2",
+      id: generateUUID(),
       text: "bar",
       timestamp: new Date(),
       sender: "bot",
       receiver: "user",
     },
     {
-      id: "3",
+      id: generateUUID(),
       text: "baz",
       timestamp: new Date(),
       sender: "user",
@@ -61,6 +51,7 @@ export function setupChatBot(element: HTMLDivElement) {
 
   for (const message of messages) {
     const msg = document.createElement("div");
+    msg.classList.add("chat-text", message.sender === "user" ? "user" : "bot");
     msg.innerHTML = message.text;
     chatWin?.appendChild(msg);
   }
