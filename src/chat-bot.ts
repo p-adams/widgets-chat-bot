@@ -21,9 +21,10 @@ export function setupChatBot(element: HTMLDivElement) {
   const chatWin = $el<HTMLDivElement>(".chat-bot-inner > .window");
   const chatBot = $el<HTMLDivElement>(".chat-bot-cog-wrapper");
   const sendMsgBtn = $el<HTMLButtonElement>(".input-outer > button");
-  const msgInput = $el<HTMLButtonElement>(".input-outer > input");
+  const msgInput = $el<HTMLInputElement>(".input-outer > input");
 
   let isOpen = false;
+  let inputTarget: HTMLInputElement;
   let message = "";
   let messages: Message[] = [
     {
@@ -49,26 +50,50 @@ export function setupChatBot(element: HTMLDivElement) {
     },
   ];
 
-  for (const message of messages) {
-    const msg = document.createElement("div");
-    msg.classList.add("chat-text", message.sender === "user" ? "user" : "bot");
-    msg.innerHTML = message.text;
-    chatWin?.appendChild(msg);
+  function displayAllMessages() {
+    for (const message of messages) {
+      createWindowMessage(message);
+    }
   }
 
-  function toggleChatBot() {
+  function createWindowMessage(newMessage: Message) {
+    const msg = document.createElement("div");
+    msg.classList.add(
+      "chat-text",
+      newMessage.sender === "user" ? "user" : "bot"
+    );
+    msg.innerHTML = newMessage.text;
+    chatWin?.appendChild(msg);
+    chatWin?.scrollTo(0, chatWin.scrollHeight);
+  }
+
+  displayAllMessages();
+
+  msgInput?.focus();
+
+  chatBot?.addEventListener("click", () => {
     isOpen = !isOpen;
     chatBotWin?.classList.add(isOpen ? "open" : "closed");
     chatBotWin?.classList.remove(isOpen ? "closed" : "open");
-  }
+  });
 
-  chatBot?.addEventListener("click", toggleChatBot);
   sendMsgBtn?.addEventListener("click", () => {
-    // TODO: handle send message
-    console.log("send", message);
+    if (message.trim() !== "") {
+      const newMessage: Message = {
+        id: generateUUID(),
+        text: message,
+        timestamp: new Date(),
+        sender: "user",
+        receiver: "bot",
+      };
+      messages.push(newMessage);
+      createWindowMessage(newMessage);
+      inputTarget.value = "";
+      message = "";
+    }
   });
   msgInput?.addEventListener("input", (e) => {
-    const target = e.target as HTMLInputElement;
-    message = target?.value;
+    inputTarget = e.target as HTMLInputElement;
+    message = inputTarget?.value;
   });
 }

@@ -55,6 +55,7 @@ main {
   bottom: 25px;
   right: 50px;
 }
+
 .chat-bot-inner {
   height: var(--window-height);
   width: 200px;
@@ -64,14 +65,23 @@ main {
   border-radius: 4px;
   padding: 8px;
 }
+
 .window {
   height: calc(var(--window-height) - 20px);
   padding: 4px;
   outline: 1px solid lightgray;
+  overflow-y: auto;
+}
+
+.chat-text {
+  width: fit-content;
+  padding: 6px;
+  margin-bottom: 4px;
 }
 
 .chat-text.user {
   background-color: #646cff;
+  margin-left: auto;
   color: white;
 }
 
