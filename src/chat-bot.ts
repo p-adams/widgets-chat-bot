@@ -1,3 +1,11 @@
+interface Message {
+  id: string;
+  text: string;
+  timestamp: Date;
+  sender: string;
+  receiver: string;
+}
+
 function $el<T extends HTMLElement = HTMLElement>(selector: string): T | null {
   return document.querySelector<T>(selector)!;
 }
@@ -27,21 +35,27 @@ export function setupChatBot(element: HTMLDivElement) {
 
   let isOpen = false;
   let message = "";
-  let messages = [
+  let messages: Message[] = [
     {
-      id: 0,
+      id: "1",
       text: "foo",
-      timestamp: new Date().toLocaleString(),
+      timestamp: new Date(),
+      sender: "user",
+      receiver: "bot",
     },
     {
-      id: 1,
+      id: "2",
       text: "bar",
-      timestamp: new Date().toLocaleString(),
+      timestamp: new Date(),
+      sender: "bot",
+      receiver: "user",
     },
     {
-      id: 2,
+      id: "3",
       text: "baz",
-      timestamp: new Date().toLocaleString(),
+      timestamp: new Date(),
+      sender: "user",
+      receiver: "bot",
     },
   ];
 
