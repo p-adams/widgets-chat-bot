@@ -1,16 +1,11 @@
-function getEl<T extends HTMLElement = HTMLElement>(
-  selector: string
-): T | null {
+function $el<T extends HTMLElement = HTMLElement>(selector: string): T | null {
   return document.querySelector<T>(selector)!;
 }
 
 export function setupChatBot(element: HTMLDivElement) {
-  element.innerHTML = `<div class="chat-bot-inner">
-        <div class="chat-bot-window closed">
+  element.innerHTML = `<div class="chat-bot-outer">
+        <div class="chat-bot-inner closed">
           <div class="window">
-          a
-          b
-          c
           </div>
          <div class="input-outer">
           <input placeholder="type message"/>
@@ -24,13 +19,37 @@ export function setupChatBot(element: HTMLDivElement) {
         </div>
     </div>`;
 
-  const chatBotWin = getEl<HTMLDivElement>(".chat-bot-window");
-  const chatBot = getEl<HTMLDivElement>(".chat-bot-cog-wrapper");
-  const sendMsgBtn = getEl<HTMLButtonElement>(".input-outer > button");
-  const msgInput = getEl<HTMLButtonElement>(".input-outer > input");
+  const chatBotWin = $el<HTMLDivElement>(".chat-bot-inner");
+  const chatWin = $el<HTMLDivElement>(".chat-bot-inner > .window");
+  const chatBot = $el<HTMLDivElement>(".chat-bot-cog-wrapper");
+  const sendMsgBtn = $el<HTMLButtonElement>(".input-outer > button");
+  const msgInput = $el<HTMLButtonElement>(".input-outer > input");
 
   let isOpen = false;
   let message = "";
+  let messages = [
+    {
+      id: 0,
+      text: "foo",
+      timestamp: new Date().toLocaleString(),
+    },
+    {
+      id: 1,
+      text: "bar",
+      timestamp: new Date().toLocaleString(),
+    },
+    {
+      id: 2,
+      text: "baz",
+      timestamp: new Date().toLocaleString(),
+    },
+  ];
+
+  for (const message of messages) {
+    const msg = document.createElement("div");
+    msg.innerHTML = message.text;
+    chatWin?.appendChild(msg);
+  }
 
   function toggleChatBot() {
     isOpen = !isOpen;

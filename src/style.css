@@ -50,12 +50,12 @@ main {
   position: relative;
 }
 
-.chat-bot-inner {
+.chat-bot-outer {
   position: absolute;
   bottom: 25px;
   right: 50px;
 }
-.chat-bot-window {
+.chat-bot-inner {
   height: var(--window-height);
   width: 200px;
   display: flex;
@@ -75,7 +75,7 @@ main {
   width: 75%;
 }
 
-.chat-bot-window.closed {
+.chat-bot-inner.closed {
   visibility: hidden;
   opacity: 0;
   transform: translateY(-10px);
@@ -83,7 +83,7 @@ main {
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
     visibility 0s 0.3s;
 }
-.chat-bot-window.open {
+.chat-bot-inner.open {
   display: flex;
   opacity: 1;
   transform: translateY(0);
